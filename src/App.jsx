@@ -1,17 +1,12 @@
 import "./App.css";
-import React from "react";
-import MovieCard from "./components/MovieCard";
+import Home from "./pages/Home";
 
-export default function App() {
-  const movieNumber = 2;
-
+function App() {
   return (
-    <>
-      {movieNumber == 1 ? (
-        <MovieCard key={1} title="Movie1" releaseDate="2023" />
-      ) : (
-        <MovieCard key={2} title="Movie 2" releaseDate="2023" />
-      )}
-    </>
+    <div>
+      <Home />
+    </div>
   );
 }
+
+export default App;

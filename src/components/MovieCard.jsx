@@ -1,4 +1,4 @@
-function MovieCard({ title, url, releaseDate }) {
+function MovieCard({ url, title, releaseDate }) {
   function onFavouriteClick() {
     alert("clicked");
   }
