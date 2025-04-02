@@ -1,17 +1,17 @@
 // Display multiple movies
 // Search for movies
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import MovieCard from "../components/MovieCard";
+import "../css/Home.css";
+import { searchMovies, getPopularMovies } from "../services/api";
 
 function Home() {
   const [searchQuery, setSearchQuery] = useState("");
+  const [movies, setMovies] = useState([]);
 
-  const movies = [
-    // render movies dynamically regardless of number
-    { id: 1, title: "John Wick", releaseDate: "2014" },
-    { id: 2, title: "Terminator", releaseDate: "2000" },
-    { id: 3, title: "The Matrix", releaseDate: "1999" },
-  ];
+  useEffect(() => {
+    
+  }, []); // dependency array - if this changes, run the 'effect'
 
   const searchMovies = (e) => {
     e.preventDefault; // prevents page reload on search

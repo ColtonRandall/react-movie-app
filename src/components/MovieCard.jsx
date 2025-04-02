@@ -1,3 +1,5 @@
+import "../css/MovieCard.css";
+
 function MovieCard({ url, title, releaseDate }) {
   function onFavouriteClick() {
     alert("clicked");
