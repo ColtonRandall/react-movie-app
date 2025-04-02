@@ -8,9 +8,23 @@ import { searchMovies, getPopularMovies } from "../services/api";
 function Home() {
   const [searchQuery, setSearchQuery] = useState("");
   const [movies, setMovies] = useState([]);
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    
+    async function loadPopularMovies() {
+      try {
+        const popularMovies = await getPopularMovies();
+        setMovies(popularMovies);
+      } catch (error) {
+        console.log(error);
+        setError("Failed to load movies...");
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    loadPopularMovies();
   }, []); // dependency array - if this changes, run the 'effect'
 
   const searchMovies = (e) => {
@@ -33,19 +47,38 @@ function Home() {
           Search
         </button>
       </form>
-      <div className="movies-grid">
+
+      {/* If an error occurs, show it */}
+      {error && <div className="error-message">{error}</div>}
+
+      {loading ? (
+        <div className="loading">Loading...</div>
+      ) : (
+        <div className="movies-grid">
+          {movies.map(
+            (movie) =>
+              // render a movie card if the search matches the movie title
+              movie.title.toLowerCase().startsWith(searchQuery) && (
+                <MovieCard
+                  movie={movie}
+                  key={movie.id} // must have a unique id
+                />
+              )
+          )}
+        </div>
+      )}
+      {/* <div className="movies-grid">
         {movies.map(
           (movie) =>
             // render a movie card if the search matches the movie title
             movie.title.toLowerCase().startsWith(searchQuery) && (
               <MovieCard
-                title={movie.title}
-                releaseDate={movie.releaseDate}
+                movie={movie}
                 key={movie.id} // must have a unique id
               />
             )
         )}
-      </div>
+      </div> */}
     </div>
   );
 }

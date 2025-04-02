@@ -1,6 +1,6 @@
 import "../css/MovieCard.css";
 
-function MovieCard({ url, title, releaseDate }) {
+function MovieCard({ movie }) {
   function onFavouriteClick() {
     alert("clicked");
   }
@@ -8,7 +8,10 @@ function MovieCard({ url, title, releaseDate }) {
   return (
     <div className="movie-card">
       <div className="movie-poster">
-        <img src={url} alt={title} />
+        <img
+          src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+          alt={movie.title}
+        />
         <div className="movie-overlay">
           <button className="favourite-btn" onClick={onFavouriteClick}>
             ❤️
@@ -16,8 +19,9 @@ function MovieCard({ url, title, releaseDate }) {
         </div>
       </div>
       <div className="movie-info">
-        <h3>{title}</h3>
-        <p>{releaseDate}</p>
+        <h3>{movie.title}</h3>
+        {/* Just show the year released - split from the hyphens */}
+        <p>{movie.release_date?.split("-")[0]}</p>
       </div>
     </div>
   );
